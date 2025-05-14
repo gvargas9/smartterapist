@@ -190,10 +190,10 @@ const Dashboard = () => {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold">
-              Admin Dashboard
+              {t('admin.dashboard.title')}
             </h1>
             <p className="mt-2 text-purple-100 max-w-2xl">
-              Monitor and manage the platform's performance, users, and behavior presets
+              {t('admin.dashboard.description')}
             </p>
           </div>
           <button
@@ -202,7 +202,7 @@ const Dashboard = () => {
             className="flex items-center bg-white bg-opacity-20 hover:bg-opacity-30 transition-colors text-white px-4 py-2 rounded-lg disabled:opacity-50"
           >
             <ArrowPathIcon className={`h-5 w-5 mr-2 ${refreshing ? 'animate-spin' : ''}`} />
-            Refresh
+            {t('common.refresh')}
           </button>
         </div>
       </div>
@@ -214,12 +214,12 @@ const Dashboard = () => {
             <UserGroupIcon className="h-6 w-6 text-blue-600" />
           </div>
           <div>
-            <p className="text-sm text-gray-500">Total Users</p>
+            <p className="text-sm text-gray-500">{t('admin.dashboard.totalUsers')}</p>
             <p className="text-2xl font-bold text-gray-900">{stats.totalUsers}</p>
             <div className="mt-1 flex justify-between text-xs text-gray-500">
-              <span>Clients: {stats.activeClients}</span>
+              <span>{t('common.clients')}: {stats.activeClients}</span>
               <span className="mx-2">|</span>
-              <span>Therapists: {stats.activeTherapists}</span>
+              <span>{t('common.therapists')}: {stats.activeTherapists}</span>
             </div>
           </div>
         </div>
@@ -229,7 +229,7 @@ const Dashboard = () => {
             <DocumentTextIcon className="h-6 w-6 text-purple-600" />
           </div>
           <div>
-            <p className="text-sm text-gray-500">Behavior Presets</p>
+            <p className="text-sm text-gray-500">{t('admin.dashboard.behaviorPresets')}</p>
             <p className="text-2xl font-bold text-gray-900">{stats.activeBehaviors}</p>
           </div>
         </div>
@@ -239,7 +239,7 @@ const Dashboard = () => {
             <CurrencyDollarIcon className="h-6 w-6 text-green-600" />
           </div>
           <div>
-            <p className="text-sm text-gray-500">Est. Monthly Revenue</p>
+            <p className="text-sm text-gray-500">{t('admin.dashboard.estMonthlyRevenue')}</p>
             <p className="text-2xl font-bold text-gray-900">${stats.totalRevenue.toFixed(2)}</p>
           </div>
         </div>
@@ -249,9 +249,9 @@ const Dashboard = () => {
             <ChatBubbleLeftRightIcon className="h-6 w-6 text-indigo-600" />
           </div>
           <div>
-            <p className="text-sm text-gray-500">Platform Activity</p>
+            <p className="text-sm text-gray-500">{t('admin.dashboard.platformActivity')}</p>
             <p className="text-2xl font-bold text-gray-900">{stats.totalMessages}</p>
-            <p className="text-xs text-gray-500 mt-1">Across {stats.totalConversations} conversations</p>
+            <p className="text-xs text-gray-500 mt-1">{t('admin.dashboard.across')} {stats.totalConversations} {t('common.conversations')}</p>
           </div>
         </div>
       </div>
@@ -264,8 +264,8 @@ const Dashboard = () => {
           {userGrowthData && (
             <div className="bg-white rounded-xl shadow p-6">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-semibold text-gray-800">User Growth</h2>
-                <div className="text-sm text-gray-500">Last 30 days</div>
+                <h2 className="text-xl font-semibold text-gray-800">{t('admin.dashboard.userGrowth')}</h2>
+                <div className="text-sm text-gray-500">{t('admin.dashboard.last30Days')}</div>
               </div>
               <div className="h-64">
                 <Line
@@ -281,7 +281,7 @@ const Dashboard = () => {
                       tooltip: {
                         callbacks: {
                           label: function(context) {
-                            return `New users: ${context.parsed.y}`;
+                            return `${t('admin.dashboard.newUsers')}: ${context.parsed.y}`;
                           }
                         }
                       }
@@ -294,13 +294,13 @@ const Dashboard = () => {
                         },
                         title: {
                           display: true,
-                          text: 'New Users'
+                          text: t('admin.dashboard.newUsers')
                         }
                       },
                       x: {
                         title: {
                           display: true,
-                          text: 'Date'
+                          text: t('common.date')
                         }
                       }
                     }
@@ -314,7 +314,7 @@ const Dashboard = () => {
           {userDistributionData && (
             <div className="bg-white rounded-xl shadow p-6">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-semibold text-gray-800">User Distribution</h2>
+                <h2 className="text-xl font-semibold text-gray-800">{t('admin.dashboard.userDistribution')}</h2>
               </div>
               <div className="h-64">
                 <Bar
@@ -333,7 +333,7 @@ const Dashboard = () => {
                         beginAtZero: true,
                         title: {
                           display: true,
-                          text: 'Number of Users'
+                          text: t('admin.dashboard.numberOfUsers')
                         }
                       }
                     }
@@ -349,7 +349,7 @@ const Dashboard = () => {
           {/* Recent Users */}
           <div className="bg-white rounded-xl shadow p-6">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-semibold text-gray-800">Recent Users</h2>
+              <h2 className="text-xl font-semibold text-gray-800">{t('admin.dashboard.recentUsers')}</h2>
               <Link
                 to="/admin/users"
                 className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center"
@@ -367,7 +367,7 @@ const Dashboard = () => {
                     </div>
                     <div className="ml-4">
                       <div className="text-sm font-medium text-gray-900">
-                        {user.name || 'Unnamed User'}
+                        {user.name || t('admin.dashboard.unnamedUser')}
                       </div>
                       <div className="text-xs text-gray-500 flex items-center">
                         <span className="capitalize">{user.role}</span>
@@ -380,14 +380,14 @@ const Dashboard = () => {
                     to={`/admin/users/${user.id}`}
                     className="text-blue-600 hover:text-blue-800 text-sm font-medium"
                   >
-                    Details
+                    {t('common.details')}
                   </Link>
                 </div>
               ))}
               
               {recentUsers.length === 0 && (
                 <div className="text-center py-8 bg-gray-50 rounded-lg">
-                  <p className="text-gray-500">No users found</p>
+                  <p className="text-gray-500">{t('admin.dashboard.noUsersFound')}</p>
                 </div>
               )}
             </div>
@@ -396,7 +396,7 @@ const Dashboard = () => {
           {/* Recent Behavior Presets */}
           <div className="bg-white rounded-xl shadow p-6">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-semibold text-gray-800">Recent Behavior Presets</h2>
+              <h2 className="text-xl font-semibold text-gray-800">{t('admin.dashboard.recentBehaviorPresets')}</h2>
               <Link
                 to="/admin/behaviors"
                 className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center"
@@ -412,25 +412,25 @@ const Dashboard = () => {
                     <div>
                       <p className="font-medium text-gray-900">{behavior.name}</p>
                       <p className="text-xs text-gray-500 mt-1">
-                        Created by: {behavior.created_by?.name || 'Unknown'}
+                        {t('admin.dashboard.createdBy')}: {behavior.created_by?.name || t('common.unknown')}
                       </p>
                     </div>
                     <Link
                       to={`/admin/behaviors/${behavior.id}`}
                       className="text-blue-600 hover:text-blue-800 text-sm font-medium"
                     >
-                      Edit
+                      {t('common.edit')}
                     </Link>
                   </div>
                   <p className="text-sm text-gray-600 mt-2 line-clamp-2">
-                    {behavior.prompt_template ? behavior.prompt_template.substring(0, 100) + '...' : behavior.description || 'No description available'}
+                    {behavior.prompt_template ? behavior.prompt_template.substring(0, 100) + '...' : behavior.description || t('admin.dashboard.noDescriptionAvailable')}
                   </p>
                 </div>
               ))}
               
               {recentBehaviors.length === 0 && (
                 <div className="text-center py-8 bg-gray-50 rounded-lg">
-                  <p className="text-gray-500">No behavior presets found</p>
+                  <p className="text-gray-500">{t('admin.dashboard.noBehaviorPresetsFound')}</p>
                 </div>
               )}
             </div>
@@ -440,14 +440,14 @@ const Dashboard = () => {
       
       {/* Quick Actions */}
       <div className="bg-white rounded-xl shadow p-6">
-        <h2 className="text-xl font-semibold text-gray-800 mb-6">Quick Actions</h2>
+        <h2 className="text-xl font-semibold text-gray-800 mb-6">{t('admin.dashboard.quickActions')}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Link
             to="/admin/users/new"
             className="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
           >
             <UserIcon className="h-5 w-5 text-blue-600 mr-3" />
-            <span className="text-gray-900">Create New User</span>
+            <span className="text-gray-900">{t('admin.dashboard.createNewUser')}</span>
           </Link>
           
           <Link
@@ -455,7 +455,7 @@ const Dashboard = () => {
             className="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
           >
             <DocumentTextIcon className="h-5 w-5 text-purple-600 mr-3" />
-            <span className="text-gray-900">Create Behavior Preset</span>
+            <span className="text-gray-900">{t('admin.dashboard.createBehaviorPreset')}</span>
           </Link>
           
           <Link
@@ -463,7 +463,7 @@ const Dashboard = () => {
             className="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
           >
             <ChartBarIcon className="h-5 w-5 text-green-600 mr-3" />
-            <span className="text-gray-900">View Reports</span>
+            <span className="text-gray-900">{t('admin.dashboard.viewReports')}</span>
           </Link>
         </div>
       </div>
@@ -474,9 +474,9 @@ const Dashboard = () => {
           to="/admin/behaviors"
           className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow"
         >
-          <h3 className="text-lg font-medium text-secondary-900">Manage Behaviors</h3>
+          <h3 className="text-lg font-medium text-secondary-900">{t('admin.dashboard.manageBehaviors')}</h3>
           <p className="mt-2 text-secondary-600">
-            Configure AI agent behavior presets
+            {t('admin.dashboard.configureAIAgentBehaviorPresets')}
           </p>
         </Link>
         
@@ -484,9 +484,9 @@ const Dashboard = () => {
           to="/admin/users"
           className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow"
         >
-          <h3 className="text-lg font-medium text-secondary-900">User Management</h3>
+          <h3 className="text-lg font-medium text-secondary-900">{t('admin.dashboard.userManagement')}</h3>
           <p className="mt-2 text-secondary-600">
-            Manage users and permissions
+            {t('admin.dashboard.manageUsersAndPermissions')}
           </p>
         </Link>
         
@@ -494,9 +494,9 @@ const Dashboard = () => {
           to="/admin/subscriptions"
           className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow"
         >
-          <h3 className="text-lg font-medium text-secondary-900">Subscriptions</h3>
+          <h3 className="text-lg font-medium text-secondary-900">{t('admin.dashboard.subscriptions')}</h3>
           <p className="mt-2 text-secondary-600">
-            Manage subscription plans and billing
+            {t('admin.dashboard.manageSubscriptionPlansAndBilling')}
           </p>
         </Link>
       </div>

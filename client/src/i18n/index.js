@@ -37,20 +37,96 @@ const SupabaseBackend = {
 const fallbackResources = {
   en: {
     translation: {
+      // Common elements
       'app.name': 'Zaira Montoya AI Wellness Coach',
+      'common.client': 'Client',
+      'common.therapist': 'Therapist',
+      'common.refresh': 'Refresh',
+      'common.viewDetails': 'View Details',
+      
+      // Navigation
       'nav.dashboard': 'Dashboard',
       'nav.chat': 'Chat',
+      
+      // Authentication
       'auth.login': 'Login',
-      'auth.logout': 'Logout'
+      'auth.logout': 'Logout',
+      
+      // Dashboard
+      'dashboard.welcomeBack': 'Welcome back, {{name}}',
+      'dashboard.trackProgress': 'Track your progress, manage your therapy sessions, and access resources to support your mental health journey.',
+      'dashboard.wellness': 'Wellness',
+      'dashboard.totalSessions': 'Total Sessions',
+      'dashboard.averageScore': 'Average Well-being Score',
+      'dashboard.progressTrend': 'Progress Trend',
+      'dashboard.lastSession': 'Last Session',
+      'dashboard.quickActions': 'Quick Actions',
+      'dashboard.chatSession': 'Chat Session',
+      'dashboard.talkWithAI': 'Talk with your AI therapist',
+      'dashboard.schedule': 'Schedule',
+      'dashboard.bookSession': 'Book a live session',
+      'dashboard.resources': 'Resources',
+      'dashboard.accessMaterials': 'Access helpful materials',
+      'dashboard.wellbeingProgress': 'Your Well-being Progress',
+      'dashboard.score': 'Score',
+      'dashboard.chartDescription': 'This chart shows your emotional well-being trends based on your conversations with the AI therapist.',
+      'dashboard.recentSessions': 'Recent Sessions',
+      'dashboard.noSummary': 'No summary available',
+      'dashboard.upcomingSession': 'Upcoming Session',
+      'dashboard.withTherapist': 'With Dr. {{name}}',
+      'dashboard.joinSession': 'Join Session',
+      'dashboard.noUpcomingSessions': 'No Upcoming Sessions',
+      'dashboard.noSessionsScheduled': 'You don\'t have any upcoming sessions scheduled.',
+      'dashboard.scheduleNow': 'Schedule Now',
+      'dashboard.helpfulResources': 'Helpful Resources',
+      'dashboard.sentimentScore': 'Sentiment Score'
     }
   },
   es: {
     translation: {
+      // Common elements
       'app.name': 'Zaira Montoya Entrenadora de Bienestar con IA',
+      'common.client': 'Cliente',
+      'common.therapist': 'Terapeuta',
+      'common.refresh': 'Actualizar',
+      'common.viewDetails': 'Ver Detalles',
+      
+      // Navigation
       'nav.dashboard': 'Panel Principal',
       'nav.chat': 'Chat',
+      
+      // Authentication
       'auth.login': 'Iniciar Sesión',
-      'auth.logout': 'Cerrar Sesión'
+      'auth.logout': 'Cerrar Sesión',
+      
+      // Dashboard
+      'dashboard.welcomeBack': 'Bienvenido/a de nuevo, {{name}}',
+      'dashboard.trackProgress': 'Sigue tu progreso, gestiona tus sesiones de terapia y accede a recursos para apoyar tu viaje de salud mental.',
+      'dashboard.wellness': 'Bienestar',
+      'dashboard.totalSessions': 'Sesiones Totales',
+      'dashboard.averageScore': 'Puntuación Media de Bienestar',
+      'dashboard.progressTrend': 'Tendencia de Progreso',
+      'dashboard.lastSession': 'Última Sesión',
+      'dashboard.quickActions': 'Acciones Rápidas',
+      'dashboard.chatSession': 'Sesión de Chat',
+      'dashboard.talkWithAI': 'Habla con tu terapeuta IA',
+      'dashboard.schedule': 'Programar',
+      'dashboard.bookSession': 'Reservar una sesión en vivo',
+      'dashboard.resources': 'Recursos',
+      'dashboard.accessMaterials': 'Acceder a materiales útiles',
+      'dashboard.wellbeingProgress': 'Tu Progreso de Bienestar',
+      'dashboard.score': 'Puntuación',
+      'dashboard.chartDescription': 'Este gráfico muestra las tendencias de tu bienestar emocional basadas en tus conversaciones con el terapeuta IA.',
+      'dashboard.recentSessions': 'Sesiones Recientes',
+      'dashboard.noSummary': 'No hay resumen disponible',
+      'dashboard.upcomingSession': 'Próxima Sesión',
+      'dashboard.withTherapist': 'Con Dr. {{name}}',
+      'dashboard.joinSession': 'Unirse a la Sesión',
+      'dashboard.noUpcomingSessions': 'Sin Sesiones Programadas',
+      'dashboard.noSessionsScheduled': 'No tienes ninguna sesión programada próximamente.',
+      'dashboard.scheduleNow': 'Programar Ahora',
+      'dashboard.helpfulResources': 'Recursos Útiles',
+      'dashboard.sentimentScore': 'Puntuación de Sentimiento'
     }
   }
 };

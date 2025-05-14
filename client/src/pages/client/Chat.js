@@ -53,7 +53,7 @@ const Chat = () => {
             id: `welcome-${Date.now()}`,
             conversation_id: newConversationId,
             sender: 'ai',
-            text: `Hello ${user.profile_data?.name || 'there'}! How can I help you today?`,
+            text: t('chat.welcomeMessage', { name: user.profile_data?.name || t('chat.there') }),
             timestamp: new Date().toISOString(),
             sentiment_score: 0.8
           };
@@ -67,7 +67,7 @@ const Chat = () => {
         setMessages([{
           id: `error-${Date.now()}`,
           sender: 'system',
-          text: 'Sorry, there was an error starting the conversation. Please try refreshing the page.',
+          text: t('chat.errorStartingConversation'),
           timestamp: new Date().toISOString(),
         }]);
       }
@@ -153,7 +153,7 @@ const Chat = () => {
       setMessages(prev => [...prev, {
         id: `error-${Date.now()}`,
         sender: 'system',
-        text: 'Sorry, there was an error processing your message. Please try again.',
+        text: t('chat.errorProcessingMessage'),
         timestamp: new Date().toISOString(),
       }]);
     } finally {
@@ -345,7 +345,7 @@ const Chat = () => {
         id: `welcome-${Date.now()}`,
         conversation_id: newConversationId,
         sender: 'ai',
-        text: `Hello ${user.profile_data?.name || 'there'}! How can I help you today?`,
+        text: t('chat.welcomeMessage', { name: user.profile_data?.name || t('chat.there') }),
         timestamp: new Date().toISOString(),
         sentiment_score: 0.8
       };
@@ -358,7 +358,7 @@ const Chat = () => {
       setMessages([{
         id: `error-${Date.now()}`,
         sender: 'system',
-        text: 'Sorry, there was an error starting a new conversation. Please try refreshing the page.',
+        text: t('chat.errorStartingNewConversation'),
         timestamp: new Date().toISOString(),
       }]);
     }
@@ -368,12 +368,12 @@ const Chat = () => {
     <div className="flex flex-col h-[calc(100vh-12rem)]">
       {/* Header */}
       <div className="bg-white border-b p-4 flex justify-between items-center">
-        <h2 className="text-lg font-semibold text-secondary-900">AI Therapy Session</h2>
+        <h2 className="text-lg font-semibold text-secondary-900">{t('chat.aiTherapySession')}</h2>
         <button
           onClick={startNewConversation}
           className="text-sm px-3 py-1 bg-primary-100 text-primary-700 rounded-md hover:bg-primary-200 transition-colors"
         >
-          New Conversation
+          {t('chat.newConversation')}
         </button>
       </div>
       
@@ -386,7 +386,7 @@ const Chat = () => {
           >
             {message.sender !== 'user' && message.sender !== 'system' && (
               <div className="h-8 w-8 rounded-full bg-primary-500 flex items-center justify-center text-white mr-2">
-                AI
+                {t('chat.ai')}
               </div>
             )}
             <div
@@ -415,7 +415,7 @@ const Chat = () => {
         {isTyping && (
           <div className="flex justify-start">
             <div className="h-8 w-8 rounded-full bg-primary-500 flex items-center justify-center text-white mr-2">
-              AI
+              {t('chat.ai')}
             </div>
             <div className="bg-white rounded-lg p-4 shadow-sm">
               <div className="flex space-x-1">
@@ -439,7 +439,7 @@ const Chat = () => {
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
             disabled={isProcessing || isRecording}
-            placeholder={isRecording ? "Recording..." : "Type your message..."}
+            placeholder={isRecording ? t('chat.recording') : t('chat.typeYourMessage')}
             className="flex-1 rounded-lg border border-secondary-300 p-3 focus:outline-none focus:ring-2 focus:ring-primary-500"
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {

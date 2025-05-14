@@ -150,16 +150,16 @@ const Dashboard = () => {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold">
-              Welcome back, {user.profile_data?.name || 'Client'}
+              {t('dashboard.welcomeBack', {name: user.profile_data?.name || t('common.client')})}
             </h1>
             <p className="mt-2 text-primary-100 max-w-2xl">
-              Track your progress, manage your therapy sessions, and access resources to support your mental health journey.
+              {t('dashboard.trackProgress')}
             </p>
           </div>
           <div className="hidden md:block">
             <img 
               src="https://cdn-icons-png.flaticon.com/512/3209/3209993.png" 
-              alt="Wellness" 
+              alt={t('dashboard.wellness')} 
               className="w-24 h-24 opacity-80"
             />
           </div>
@@ -170,24 +170,24 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center justify-center text-center">
           <span className="text-3xl font-bold text-primary-500">{stats.totalSessions}</span>
-          <span className="text-sm text-gray-500 mt-2">Total Sessions</span>
+          <span className="text-sm text-gray-500 mt-2">{t('dashboard.totalSessions')}</span>
         </div>
         
         <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center justify-center text-center">
           <span className="text-3xl font-bold text-primary-500">{stats.averageSentiment}</span>
-          <span className="text-sm text-gray-500 mt-2">Average Well-being Score</span>
+          <span className="text-sm text-gray-500 mt-2">{t('dashboard.averageScore')}</span>
         </div>
         
         <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center justify-center text-center">
           <span className={`text-3xl font-bold ${stats.improvementTrend === 'improving' ? 'text-green-500' : stats.improvementTrend === 'declining' ? 'text-red-500' : 'text-yellow-500'}`}>
             {stats.improvementTrend === 'improving' ? '↑' : stats.improvementTrend === 'declining' ? '↓' : '→'}
           </span>
-          <span className="text-sm text-gray-500 mt-2">Progress Trend</span>
+          <span className="text-sm text-gray-500 mt-2">{t('dashboard.progressTrend')}</span>
         </div>
         
         <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center justify-center text-center">
           <span className="text-3xl font-bold text-primary-500">{stats.lastSessionDate || 'None'}</span>
-          <span className="text-sm text-gray-500 mt-2">Last Session</span>
+          <span className="text-sm text-gray-500 mt-2">{t('dashboard.lastSession')}</span>
         </div>
       </div>
       
@@ -197,7 +197,7 @@ const Dashboard = () => {
         <div className="lg:col-span-2 space-y-8">
           {/* Quick Actions */}
           <div className="bg-white rounded-xl shadow p-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Quick Actions</h2>
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">{t('dashboard.quickActions')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Link
                 to="/client/chat"
@@ -207,8 +207,8 @@ const Dashboard = () => {
                   <ChatBubbleLeftRightIcon className="h-6 w-6 text-primary-600" />
                 </div>
                 <div className="ml-4">
-                  <h3 className="font-medium text-gray-900">Chat Session</h3>
-                  <p className="text-sm text-gray-500">Talk with your AI therapist</p>
+                  <h3 className="font-medium text-gray-900">{t('dashboard.chatSession')}</h3>
+                  <p className="text-sm text-gray-500">{t('dashboard.talkWithAI')}</p>
                 </div>
               </Link>
               
@@ -220,8 +220,8 @@ const Dashboard = () => {
                   <CalendarIcon className="h-6 w-6 text-primary-600" />
                 </div>
                 <div className="ml-4">
-                  <h3 className="font-medium text-gray-900">Schedule</h3>
-                  <p className="text-sm text-gray-500">Book a live session</p>
+                  <h3 className="font-medium text-gray-900">{t('dashboard.schedule')}</h3>
+                  <p className="text-sm text-gray-500">{t('dashboard.bookSession')}</p>
                 </div>
               </button>
               
@@ -233,8 +233,8 @@ const Dashboard = () => {
                   <DocumentTextIcon className="h-6 w-6 text-primary-600" />
                 </div>
                 <div className="ml-4">
-                  <h3 className="font-medium text-gray-900">Resources</h3>
-                  <p className="text-sm text-gray-500">Access helpful materials</p>
+                  <h3 className="font-medium text-gray-900">{t('dashboard.resources')}</h3>
+                  <p className="text-sm text-gray-500">{t('dashboard.accessMaterials')}</p>
                 </div>
               </button>
             </div>
@@ -244,13 +244,13 @@ const Dashboard = () => {
           {sentimentData && (
             <div className="bg-white rounded-xl shadow p-6">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-semibold text-gray-800">Your Well-being Progress</h2>
+                <h2 className="text-xl font-semibold text-gray-800">{t('dashboard.wellbeingProgress')}</h2>
                 <button 
                   className="text-primary-500 hover:text-primary-700 flex items-center text-sm font-medium"
                   onClick={() => {/* Refresh chart data */}}
                 >
                   <ArrowPathIcon className="h-4 w-4 mr-1" />
-                  Refresh
+                  {t('common.refresh')}
                 </button>
               </div>
               <div className="h-64">
@@ -266,7 +266,7 @@ const Dashboard = () => {
                       tooltip: {
                         callbacks: {
                           label: function(context) {
-                            return `Score: ${context.parsed.y.toFixed(2)}`;
+                            return `${t('dashboard.score')}: ${context.parsed.y.toFixed(2)}`;
                           }
                         }
                       }
@@ -291,14 +291,14 @@ const Dashboard = () => {
                 />
               </div>
               <p className="mt-4 text-sm text-gray-500 italic">
-                This chart shows your emotional well-being trends based on your conversations with the AI therapist.
+                {t('dashboard.chartDescription')}
               </p>
             </div>
           )}
           
           {/* Recent Conversations */}
           <div className="bg-white rounded-xl shadow p-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Recent Sessions</h2>
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">{t('dashboard.recentSessions')}</h2>
             <div className="space-y-4">
               {conversations.map((conversation) => (
             <div
@@ -311,14 +311,14 @@ const Dashboard = () => {
                     {new Date(conversation.start_ts).toLocaleDateString()}
                   </p>
                   <p className="text-secondary-600 text-sm mt-1">
-                    {conversation.summaries?.[0]?.summary_text || 'No summary available'}
+                    {conversation.summaries?.[0]?.summary_text || t('dashboard.noSummary')}
                   </p>
                 </div>
                 <button
                   onClick={() => {/* View details logic */}}
                   className="text-primary-600 hover:text-primary-700 text-sm font-medium"
                 >
-                  View Details
+                  {t('common.viewDetails')}
                 </button>
               </div>
             </div>
@@ -332,7 +332,7 @@ const Dashboard = () => {
           {/* Upcoming Session */}
           {upcomingSession ? (
             <div className="bg-white rounded-xl shadow p-6">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">Upcoming Session</h2>
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">{t('dashboard.upcomingSession')}</h2>
               <div className="bg-primary-50 p-4 rounded-lg">
                 <div className="flex items-center mb-4">
                   <div className="h-12 w-12 rounded-full bg-primary-100 flex items-center justify-center mr-4">
@@ -340,7 +340,7 @@ const Dashboard = () => {
                   </div>
                   <div>
                     <h3 className="font-medium text-gray-900">
-                      With Dr. {upcomingSession.therapists?.name || 'Therapist'}
+                      {t('dashboard.withTherapist', {name: upcomingSession.therapists?.name || t('common.therapist')})}
                     </h3>
                     <p className="text-sm text-gray-500">
                       {new Date(upcomingSession.start_time).toLocaleString()}
@@ -351,20 +351,20 @@ const Dashboard = () => {
                   onClick={() => {/* Join session logic */}}
                   className="w-full bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-colors flex items-center justify-center"
                 >
-                  Join Session
+                  {t('dashboard.joinSession')}
                 </button>
               </div>
             </div>
           ) : (
             <div className="bg-white rounded-xl shadow p-6">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">No Upcoming Sessions</h2>
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">{t('dashboard.noUpcomingSessions')}</h2>
               <div className="bg-gray-50 p-4 rounded-lg text-center">
-                <p className="text-gray-600 mb-4">You don't have any upcoming sessions scheduled.</p>
+                <p className="text-gray-600 mb-4">{t('dashboard.noSessionsScheduled')}</p>
                 <button
                   onClick={() => {/* Schedule session logic */}}
                   className="bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-colors"
                 >
-                  Schedule Now
+                  {t('dashboard.scheduleNow')}
                 </button>
               </div>
             </div>
@@ -372,7 +372,7 @@ const Dashboard = () => {
           
           {/* Resources */}
           <div className="bg-white rounded-xl shadow p-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Helpful Resources</h2>
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">{t('dashboard.helpfulResources')}</h2>
             <div className="space-y-3">
               {resources.map(resource => (
                 <a

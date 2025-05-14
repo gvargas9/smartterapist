@@ -131,7 +131,7 @@ const Dashboard = () => {
     const chartData = {
       labels: dates,
       datasets: [{
-        label: 'Client Sentiment Trend',
+        label: t('dashboard.clientSentimentTrend'),
         data: data,
         borderColor: 'rgb(59, 130, 246)',
         backgroundColor: 'rgba(59, 130, 246, 0.1)',
@@ -246,7 +246,7 @@ const Dashboard = () => {
                       tooltip: {
                         callbacks: {
                           label: function(context) {
-                            return `Score: ${context.parsed.y.toFixed(2)}`;
+                            return `${t('dashboard.score')}: ${context.parsed.y.toFixed(2)}`;
                           }
                         }
                       }
@@ -257,13 +257,13 @@ const Dashboard = () => {
                         max: 1,
                         title: {
                           display: true,
-                          text: 'Average Sentiment Score'
+                          text: t('dashboard.averageSentimentScore')
                         }
                       },
                       x: {
                         title: {
                           display: true,
-                          text: 'Date'
+                          text: t('common.date')
                         }
                       }
                     }
@@ -308,7 +308,7 @@ const Dashboard = () => {
                       </div>
                       <div>
                         <p className="font-medium text-gray-900">
-                          {session.clients?.name || 'Client'}
+                          {session.clients?.name || t('common.client')}
                         </p>
                         <p className="text-sm text-gray-600">
                           {new Date(session.start_time).toLocaleString()}
@@ -319,19 +319,19 @@ const Dashboard = () => {
                       onClick={() => {/* Join session logic */}}
                       className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
                     >
-                      Join
+                      {t('dashboard.join')}
                     </button>
                   </div>
                 ))}
               </div>
             ) : (
               <div className="text-center py-8 bg-gray-50 rounded-lg">
-                <p className="text-gray-500 mb-4">No upcoming sessions scheduled</p>
+                <p className="text-gray-500 mb-4">{t('dashboard.noSessionsScheduled')}</p>
                 <button
                   onClick={() => {/* Schedule session logic */}}
                   className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
                 >
-                  Schedule New Session
+                  {t('dashboard.scheduleNewSession')}
                 </button>
               </div>
             )}
@@ -342,12 +342,12 @@ const Dashboard = () => {
         <div className="space-y-8">
           <div className="bg-white rounded-xl shadow p-6">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-semibold text-gray-800">Recent AI Summaries</h2>
+              <h2 className="text-xl font-semibold text-gray-800">{t('dashboard.recentAISummaries')}</h2>
               <Link
                 to="/therapist/clients"
                 className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center"
               >
-                View All <ArrowRightIcon className="h-4 w-4 ml-1" />
+                {t('common.viewAll')} <ArrowRightIcon className="h-4 w-4 ml-1" />
               </Link>
             </div>
             
@@ -361,7 +361,7 @@ const Dashboard = () => {
                     <div className="flex justify-between items-start mb-2">
                       <div>
                         <p className="font-medium text-gray-900">
-                          {summary.conversations?.clients?.name || 'Client'}
+                          {summary.conversations?.clients?.name || t('common.client')}
                         </p>
                         <p className="text-sm text-gray-600">
                           {new Date(summary.created_at).toLocaleString()}
@@ -371,17 +371,17 @@ const Dashboard = () => {
                         to={`/therapist/clients/${summary.conversations?.client_id}`}
                         className="text-blue-600 hover:text-blue-800 text-sm font-medium"
                       >
-                        Details
+                        {t('common.details')}
                       </Link>
                     </div>
                     <p className="text-gray-800 line-clamp-3">{summary.summary_text}</p>
                     <div className="mt-2 flex flex-wrap gap-2">
                       <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                        Sentiment: {summary.sentiment_metrics?.average?.toFixed(2) || 'N/A'}
+                        {t('dashboard.sentiment')}: {summary.sentiment_metrics?.average?.toFixed(2) || t('common.notAvailable')}
                       </span>
                       {summary.sentiment_metrics?.trend && (
                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${summary.sentiment_metrics.trend === 'improving' ? 'bg-green-100 text-green-800' : summary.sentiment_metrics.trend === 'declining' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'}`}>
-                          Trend: {summary.sentiment_metrics.trend}
+                          {t('dashboard.trend')}: {t(`dashboard.trend.${summary.sentiment_metrics.trend}`)}
                         </span>
                       )}
                     </div>
@@ -430,7 +430,7 @@ const Dashboard = () => {
       {/* Client List Preview */}
       <div className="bg-white rounded-lg shadow p-6">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-medium text-secondary-900">Your Clients</h2>
+          <h2 className="text-lg font-medium text-secondary-900">{t('dashboard.yourClients')}</h2>
           <Link
             to="/therapist/clients"
             className="text-primary-600 hover:text-primary-700 text-sm font-medium"
@@ -447,10 +447,10 @@ const Dashboard = () => {
               className="p-4 bg-secondary-50 rounded-lg hover:bg-secondary-100 transition-colors"
             >
               <p className="font-medium text-secondary-900">
-                {client.users?.profile_data?.name || client.name || 'Client'}
+                {client.users?.profile_data?.name || client.name || t('common.client')}
               </p>
               <p className="text-sm text-secondary-600">
-                {client.client_behaviors?.length || 0} Active Behaviors
+                {client.client_behaviors?.length || 0} {t('dashboard.activeBehaviors')}
               </p>
             </Link>
           ))}
