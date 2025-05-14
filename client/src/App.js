@@ -23,16 +23,21 @@ import SupabaseTestPage from './pages/SupabaseTestPage';
 // Client Pages
 import ClientDashboard from './pages/client/Dashboard';
 import ClientChat from './pages/client/Chat';
+import ClientScheduleSession from './pages/client/ScheduleSession';
 
 // Therapist Pages
 import TherapistDashboard from './pages/therapist/Dashboard';
 import TherapistClientList from './pages/therapist/ClientList';
 import TherapistClientDetail from './pages/therapist/ClientDetail';
+import TherapistSessionManagement from './pages/therapist/SessionManagement';
+import TherapistBehaviorPresets from './pages/therapist/BehaviorPresets';
+import TherapistResourceManagement from './pages/therapist/ResourceManagement';
 
 // Admin Pages
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminUserManagement from './pages/admin/UserManagement';
 import AdminBehaviorManagement from './pages/admin/BehaviorManagement';
+import AdminSubscriptionManagement from './pages/admin/SubscriptionManagement';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -78,6 +83,7 @@ function App() {
           <Route path="/client" element={<Navigate to="/client/dashboard" replace />} />
           <Route path="/client/dashboard" element={<ClientDashboard />} />
           <Route path="/client/chat" element={<ClientChat />} />
+          <Route path="/client/schedule" element={<ClientScheduleSession />} />
         </Route>
       </Route>
       
@@ -88,6 +94,9 @@ function App() {
           <Route path="/therapist/dashboard" element={<TherapistDashboard />} />
           <Route path="/therapist/clients" element={<TherapistClientList />} />
           <Route path="/therapist/clients/:id" element={<TherapistClientDetail />} />
+          <Route path="/therapist/sessions/:sessionId" element={<TherapistSessionManagement />} />
+          <Route path="/therapist/behaviors" element={<TherapistBehaviorPresets />} />
+          <Route path="/therapist/resources" element={<TherapistResourceManagement />} />
         </Route>
       </Route>
       
@@ -98,6 +107,7 @@ function App() {
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/users" element={<AdminUserManagement />} />
           <Route path="/admin/behaviors" element={<AdminBehaviorManagement />} />
+          <Route path="/admin/subscriptions" element={<AdminSubscriptionManagement />} />
           <Route path="/admin/users/:id" element={<AdminUserManagement />} />
         </Route>
       </Route>
