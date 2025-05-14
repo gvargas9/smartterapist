@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { useTranslation } from 'react-i18next';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -12,6 +13,7 @@ const Register = () => {
   
   const { signUp } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,13 +21,13 @@ const Register = () => {
     
     // Validate passwords match
     if (password !== confirmPassword) {
-      setErrorMessage('Passwords do not match');
+      setErrorMessage(t('register.passwordsDoNotMatch'));
       return;
     }
     
     // Validate password strength
     if (password.length < 8) {
-      setErrorMessage('Password must be at least 8 characters long');
+      setErrorMessage(t('register.passwordTooShort'));
       return;
     }
     
@@ -36,7 +38,7 @@ const Register = () => {
       navigate('/');
     } catch (error) {
       console.error('Registration error:', error);
-      setErrorMessage(error.message || 'Failed to create account');
+      setErrorMessage(error.message || t('register.failedToCreateAccount'));
     } finally {
       setIsLoading(false);
     }
@@ -47,12 +49,12 @@ const Register = () => {
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-secondary-900">
-            Create a new account
+            {t('register.createNewAccount')}
           </h2>
           <p className="mt-2 text-center text-sm text-secondary-600">
-            Or{' '}
+            {t('register.or')}{' '}
             <Link to="/login" className="font-medium text-primary-600 hover:text-primary-500">
-              sign in to your existing account
+              {t('register.signInToExistingAccount')}
             </Link>
           </p>
         </div>
@@ -61,7 +63,7 @@ const Register = () => {
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email-address" className="sr-only">
-                Email address
+                {t('common.emailAddress')}
               </label>
               <input
                 id="email-address"
@@ -70,14 +72,14 @@ const Register = () => {
                 autoComplete="email"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-secondary-300 placeholder-secondary-500 text-secondary-900 rounded-t-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
-                placeholder="Email address"
+                placeholder={t('common.emailAddress')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
               <label htmlFor="password" className="sr-only">
-                Password
+                {t('common.password')}
               </label>
               <input
                 id="password"
@@ -86,14 +88,14 @@ const Register = () => {
                 autoComplete="new-password"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-secondary-300 placeholder-secondary-500 text-secondary-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
-                placeholder="Password"
+                placeholder={t('common.password')}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div>
               <label htmlFor="confirm-password" className="sr-only">
-                Confirm Password
+                {t('register.confirmPassword')}
               </label>
               <input
                 id="confirm-password"
@@ -102,7 +104,7 @@ const Register = () => {
                 autoComplete="new-password"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-secondary-300 placeholder-secondary-500 text-secondary-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
-                placeholder="Confirm Password"
+                placeholder={t('register.confirmPassword')}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
@@ -111,7 +113,7 @@ const Register = () => {
           
           <div className="mt-4">
             <label htmlFor="role" className="block text-sm font-medium text-secondary-700">
-              Account Type
+              {t('register.accountType')}
             </label>
             <select
               id="role"
@@ -120,8 +122,8 @@ const Register = () => {
               value={role}
               onChange={(e) => setRole(e.target.value)}
             >
-              <option value="client">Client</option>
-              <option value="therapist">Therapist</option>
+              <option value="client">{t('common.client')}</option>
+              <option value="therapist">{t('common.therapist')}</option>
             </select>
           </div>
 
@@ -151,20 +153,20 @@ const Register = () => {
                   </svg>
                 </span>
               )}
-              Create Account
+              {t('register.createAccount')}
             </button>
           </div>
         </form>
         
         <div className="text-sm text-center">
           <p className="text-secondary-600">
-            By creating an account, you agree to our{' '}
+            {t('register.agreementText')}{' '}
             <a href="#" className="font-medium text-primary-600 hover:text-primary-500">
-              Terms of Service
+              {t('register.termsOfService')}
             </a>{' '}
-            and{' '}
+            {t('common.and')}{' '}
             <a href="#" className="font-medium text-primary-600 hover:text-primary-500">
-              Privacy Policy
+              {t('register.privacyPolicy')}
             </a>
           </p>
         </div>

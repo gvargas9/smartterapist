@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -10,6 +11,7 @@ const Login = () => {
   
   const { signIn } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +23,7 @@ const Login = () => {
       navigate('/');
     } catch (error) {
       console.error('Login error:', error);
-      setErrorMessage(error.message || 'Failed to sign in');
+      setErrorMessage(error.message || t('login.failedToSignIn'));
     } finally {
       setIsLoading(false);
     }
@@ -32,12 +34,12 @@ const Login = () => {
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-secondary-900">
-            Sign in to your account
+            {t('login.signInToYourAccount')}
           </h2>
           <p className="mt-2 text-center text-sm text-secondary-600">
-            Or{' '}
+            {t('login.or')}{' '}
             <Link to="/register" className="font-medium text-primary-600 hover:text-primary-500">
-              create a new account
+              {t('login.createNewAccount')}
             </Link>
           </p>
         </div>
@@ -46,7 +48,7 @@ const Login = () => {
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email-address" className="sr-only">
-                Email address
+                {t('common.emailAddress')}
               </label>
               <input
                 id="email-address"
@@ -55,14 +57,14 @@ const Login = () => {
                 autoComplete="email"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-secondary-300 placeholder-secondary-500 text-secondary-900 rounded-t-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
-                placeholder="Email address"
+                placeholder={t('common.emailAddress')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
               <label htmlFor="password" className="sr-only">
-                Password
+                {t('common.password')}
               </label>
               <input
                 id="password"
@@ -71,7 +73,7 @@ const Login = () => {
                 autoComplete="current-password"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-secondary-300 placeholder-secondary-500 text-secondary-900 rounded-b-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
-                placeholder="Password"
+                placeholder={t('common.password')}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -93,13 +95,13 @@ const Login = () => {
                 className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-secondary-300 rounded"
               />
               <label htmlFor="remember-me" className="ml-2 block text-sm text-secondary-900">
-                Remember me
+                {t('login.rememberMe')}
               </label>
             </div>
 
             <div className="text-sm">
               <a href="#" className="font-medium text-primary-600 hover:text-primary-500">
-                Forgot your password?
+                {t('login.forgotPassword')}
               </a>
             </div>
           </div>
@@ -124,7 +126,7 @@ const Login = () => {
                   </svg>
                 </span>
               )}
-              Sign in
+              {t('login.signIn')}
             </button>
           </div>
         </form>
