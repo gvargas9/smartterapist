@@ -75,14 +75,24 @@ export const LanguageProvider = ({ children }) => {
     }
     
     try {
-      // Update i18n
-      await i18n.changeLanguage(languageCode);
+      console.log(`LanguageContext: Changing language to ${languageCode}`);
       
-      // Update state
+      // Update state first
       setCurrentLanguage(languageCode);
       
       // Save to localStorage
       localStorage.setItem('language', languageCode);
+      
+      // Update i18n - this triggers the translation reload
+      await i18n.changeLanguage(languageCode);
+      console.log(`Language changed to ${languageCode}, i18n.language is now: ${i18n.language}`);
+      
+      // Force reload resources to ensure translations are applied
+      if (i18n.services.resourceStore) {
+        console.log('Reloading translation resources...');
+        // This will trigger a reload of translations from Supabase
+        await i18n.reloadResources(languageCode, 'translation');
+      }
       
       // If user is logged in, save preference to Supabase
       const { data: { session } } = await supabase.auth.getSession();

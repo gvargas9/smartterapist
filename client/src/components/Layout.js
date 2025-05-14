@@ -1,10 +1,13 @@
 import React from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { useTranslation } from 'react-i18next';
+import LanguageSelector from './LanguageSelector';
 
 const Layout = ({ type }) => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   
   const handleSignOut = async () => {
     try {
@@ -24,7 +27,7 @@ const Layout = ({ type }) => {
             <div className="flex">
               <div className="flex-shrink-0 flex items-center">
                 <Link to="/" className="text-primary-600 font-bold text-xl">
-                  AI Coach & Therapist
+                  {t('app.name')}
                 </Link>
               </div>
               
@@ -33,10 +36,10 @@ const Layout = ({ type }) => {
                 {type === 'client' && (
                   <>
                     <Link to="/client/dashboard" className="border-primary-500 text-secondary-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                      Dashboard
+                      {t('nav.dashboard')}
                     </Link>
                     <Link to="/client/chat" className="border-transparent text-secondary-500 hover:border-secondary-300 hover:text-secondary-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                      Chat
+                      {t('nav.chat')}
                     </Link>
                   </>
                 )}
@@ -72,6 +75,9 @@ const Layout = ({ type }) => {
             </div>
             
             <div className="hidden sm:ml-6 sm:flex sm:items-center">
+              {/* Language Selector */}
+              <LanguageSelector className="mr-4" />
+              
               {/* Profile dropdown */}
               <div className="ml-3 relative flex items-center space-x-4">
                 <span className="text-sm font-medium text-secondary-700">
@@ -82,7 +88,7 @@ const Layout = ({ type }) => {
                   type="button"
                   className="text-secondary-500 hover:text-secondary-700 focus:outline-none"
                 >
-                  Sign out
+                  {t('auth.logout')}
                 </button>
               </div>
             </div>
@@ -161,6 +167,11 @@ const Layout = ({ type }) => {
           </div>
           
           <div className="pt-4 pb-3 border-t border-secondary-200">
+            {/* Mobile Language Selector */}
+            <div className="px-4 py-2">
+              <LanguageSelector />
+            </div>
+            
             <div className="flex items-center px-4">
               <div className="ml-3">
                 <div className="text-base font-medium text-secondary-800">{user?.email}</div>
